@@ -1,0 +1,375 @@
+# Shared Conditions
+shared:
+  is_default_branch: &is_default_branch
+    - and:
+        - "base=main"
+        - "base=master"
+
+  is_bot_author: &is_bot_author
+    - or:
+        - "author=thecloudsolutionsbot"
+        - "author=github-actions[bot]"
+        - "author=dependabot[bot]"
+        - "author=renovate[bot]"
+        - "author=@bots"
+
+  not_bot_author: &not_bot_author
+    - and:
+        - "-author=thecloudsolutionsbot"
+        - "-author=github-actions[bot]"
+        - "-author=dependabot[bot]"
+        - "-author=renovate[bot]"
+        - "-author=@bots"
+
+  is_external_author: &is_external_author
+    - and:
+        - and: *not_bot_author
+        - "-author=@contributors"
+        - "-author=@engineering"
+        - "-author=@approvers"
+        - "-author=@admins"
+
+  is_wip_title: &is_wip_title
+    - and:
+        - "title~=^(wip|WIP)"
+
+  not_wip: &not_wip
+    - and:
+        - "-title~=^(wip|WIP)"
+        - "-label~=(WIP|wip|do-not-merge|do not merge|triage|stale|feedback|help needed)"
+        - "-draft"
+
+  is_in_conflict: &is_in_conflict
+    - and:
+        - "conflict"
+
+  not_in_conflict: &not_in_conflict
+    - and:
+        - "-conflict"
+        - "-label~=(conflict)"
+
+  is_open: &is_open
+    - and:
+        - "-merged"
+        - "-closed"
+
+  is_closed: &is_closed
+    - and:
+        - "closed"
+
+  no_changes: &no_changes
+    - and:
+        - "#files=0"
+
+  is_stale: &is_stale
+    - and:
+        - "commits[*].date_committer < 30 days ago"
+        - "updated-at < 7 days ago"
+
+  is_stale_invalid_duplicate_wontfix: &is_stale_invalid_duplicate_wontfix
+    - and:
+        - "label~=(stale|duplicate|invalid|wontfix)"
+
+  is_approved: &is_approved
+    - and:
+        - "#approved-reviews-by>=1"
+
+  not_approved: &not_approved
+    - and:
+        - "#approved-reviews-by=0"
+
+  is_readme: &is_readme
+    - and:
+        - "files~=^README\\..*$"
+
+  requires_thecloudsolutions: &requires_thecloudsolutions
+    - or:
+        - "files~=(mergify|dependabot|renovate|CODEOWNERS|\.github|Makefile|Dockerfile)"
+        - "label~=(thecloudsolutions-engineering)"
+
+  requires_readme_rebuild: &requires_readme_rebuild
+    - and:
+        - "files=README.yaml"
+        - or:
+            - "-files=README.md"
+            - "-files=README.md.gotmpl"
+
+  requires_rebase: &requires_rebase
+    - and:
+        - "#commits-behind>=5"
+
+  requires_title: &requires_title
+    - and:
+        - "-title~=^[0-9A-Za-z]+"
+
+  requires_description: &requires_description
+    - and:
+        - "-body~=[0-9A-Za-z]{3,}\\s+[0-9A-Za-z]{3,}\\s+[0-9A-Za-z]{3,}"
+        - "body~=(Describe high-level what changed)"
+
+  not_pending: &not_pending
+    - and:
+        - "#check-pending=0"
+
+  is_media: &is_media
+    - and:
+        - "files~=\\.(gif|png|jpg|mp4)$"
+
+  is_auto_update: &is_auto_update
+    - and:
+        - "head~=auto-update/.*"
+
+  is_new_pr: &is_new_pr
+    - and:
+        - and: *not_approved
+        - "#label=0"
+        - or:
+            - "created-at > 5 minutes ago"
+            - "commits[*].date_committer > 5 minutes ago"
+
+# Pull Request Rules
+pull_request_rules:
+  - name: "Welcome external contributors"
+    conditions:
+      - and: *is_open
+      - and: *not_wip
+      - and: *not_bot_author
+      - and: *not_in_conflict
+      - and: *is_external_author
+      - and: *is_default_branch
+    actions:
+      comment:
+        message: |
+          Hi @{{author}}, 👋
+
+          Thank you for contributing! 🎉
+          
+          A maintainer will review your changes soon. 🚀
+
+          Please check out our [contributor guidelines](https://github.com/thecloudsolutions/.github/blob/main/CONTRIBUTING.md) while you wait.
+
+          Thanks! 🙏
+
+  - name: "Add auto-update label to automated PRs"
+    conditions:
+      - and: *is_bot_author
+      - and: *is_open
+    actions:
+      label:
+        add:
+          - "auto-update"
+
+  - name: "Add triage label to new PRs"
+    conditions:
+      - and: *is_open
+      - and: *not_bot_author
+      - and: *is_new_pr
+    actions:
+      label:
+        add:
+          - triage
+
+  - name: "Add readme label to PRs"
+    conditions:
+      - and: *is_open
+      - and: *is_bot_author
+      - and: *is_readme
+    actions:
+      label:
+        toggle:
+          - "readme"
+
+  - name: "Add wip label to PRs"
+    conditions:
+      - and: *is_open
+      - and: *is_wip_title
+    actions:
+      label:
+        toggle:
+          - wip
+
+  - name: "Add stale label to PRs"
+    conditions:
+      - and: *is_open
+      - and: *is_stale
+    actions:
+      label:
+        toggle:
+          - stale
+
+  - name: "Remove triage label to PRs"
+    conditions:
+      - or:
+        - and: *is_approved
+        - and: *is_closed
+    actions:
+      label:
+        remove:
+          - triage
+
+  - name: "Request Cloud Solutions review"
+    conditions:
+      - and: *is_open
+      - and: *requires_thecloudsolutions
+    actions:
+      label:
+        toggle:
+          - thecloudsolutions-engineering
+      comment:
+        message: |
+          ⚠️ **Important** ⚠️
+
+          Hi @{{author}}, 👋
+          
+          This pull request modifies files that require review by the Cloud Solutions Engineering Team. ⚙️
+
+          Please be patient while a core maintainer reviews your changes.
+
+          Thanks! 🙏
+
+  - name: "Request conflict resolution"
+    conditions:
+      - and: *is_open
+      - and: *is_in_conflict
+    actions:
+      comment:
+        message: |
+          ⚠️ **Important** ⚠️
+          
+          Hi @{{author}}, 👋
+
+          This pull request has conflicts and cannot be merged. 💥
+          
+          Could you please fix them?
+          
+          Thanks! 🙏
+      label:
+        toggle:
+          - conflict
+
+  - name: "Request README rebuild"
+    conditions:
+      - and: *is_default_branch
+      - and: *is_open
+      - and: *requires_readme_rebuild
+    actions:
+      comment:
+        message: |
+          ⚠️ **Important** ⚠️
+          
+          Hi @{{author}}, 👋
+          
+          This pull request contains an outdated `README.md` file. 💥
+          
+          Could you please rebuild it by running the following commands?
+
+          ```shell
+          make init
+          make readme
+          ```
+          
+          Thanks! 🙏
+
+  - name: "Request meaningful PR title"
+    conditions:
+      - and: *is_default_branch
+      - and: *is_open
+      - and: *requires_title
+    actions:
+      comment:
+        message: |
+          ⚠️ **Important** ⚠️
+
+          Hi @{{author}}, 👋
+          
+          Could you please provide a meaningful title for this pull request? ✏️
+
+          Thanks! 🙏
+
+  - name: "Request detailed PR description"
+    conditions:
+      - and: *is_default_branch
+      - and: *is_open
+      - and: *requires_description
+    actions:
+      comment:
+        message: |
+          ⚠️ **Important** ⚠️
+
+          Hi @{{author}}, 👋
+          
+          Could you please provide a detailed description for this pull request? ✏️
+          
+          You should describe **what** was changed and **why** it was changed.
+
+          Thanks! 🙏
+
+  - name: "Request rebase for outdated PRs"
+    conditions:
+      - and: *is_open
+      - and: *is_default_branch
+      - and: *requires_rebase
+    actions:
+      rebase:
+
+  - name: "Close automated PRs with persistent conflicts"
+    conditions:
+      - and: *is_open
+      - and: *is_bot_author
+      - and: *is_in_conflict
+    actions:
+      close:
+        message: "⚠️ This automated PR was closed due to unresolved merge conflicts."
+
+  - name: "Close stale, invalid, duplicate, or won't-fix PRs"
+    conditions:
+      - and: *is_open
+      - and: *is_default_branch
+      - and: *is_stale_invalid_duplicate_wontfix
+    actions:
+      close:
+        message: |
+          ⚠️ **Important** ⚠️
+
+          Hi @{{author}}, 👋
+          
+          This pull request is marked as invalid, duplicate, or won't fix. ❌
+
+          Feel free to reopen it if you think this is a mistake.
+
+          Thanks! 🙏
+
+  - name: "Close PRs without any changes"
+    conditions:
+      - and: *is_open
+      - and: *no_changes
+    actions:
+      label:
+        add:
+          - "no-changes"
+      close:
+        message: |
+          ⚠️ **Important** ⚠️
+
+          Hi @{{author}}, 👋
+          
+          This pull request has no changes and has been closed. ❌
+
+          This typically happens when another merged PR already includes the proposed modifications.
+
+          Thanks! 🙏
+
+  - name: "Auto-merge media-only PRs by bots"
+    conditions:
+      - and: *is_open
+      - and: *is_default_branch
+      - and: *is_bot_author
+      - and: *is_media
+      - and: *is_auto_update
+      - and: *not_pending
+    actions:
+      label:
+        add:
+          - "no-release"
+      merge:
+        method: "squash"
