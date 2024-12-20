@@ -1,0 +1,43 @@
+{
+    "extends": ["config:recommended", ":preserveSemverRanges"],
+    "baseBranches": ["main", "master"],
+    "labels": ["auto-update"],
+    "dependencyDashboardAutoclose": true,
+    "timezone": "Europe/Sofia",
+    "enabledManagers": ["terraform", "github-actions"],
+    "packageRules": [
+        {
+            "groupName": "Terraform Code Update",
+            "groupSlug": "terraform",
+            "description": "Monthly updates for minor and patch versions of Terraform",
+            "matchPaths": ["**.tf", "!examples/**"],
+            "matchManagers": ["terraform"],
+            "matchPackagePatterns": ["^terraform-.*"],
+            "matchRepositoryPatterns": ["^thecloudsolutions/terraform-.*"],
+            "updateTypes": ["minor", "patch"],
+            "schedule": ["on the last Fri of the month at 05:00 am"]
+        },
+        {
+            "groupName": "Terraform Examples Update",
+            "groupSlug": "terraform-examples",
+            "description": "Monthly updates for minor and patch versions of Terraform examples",
+            "matchPaths": ["examples/**.tf"],
+            "matchManagers": ["terraform"],
+            "matchPackagePatterns": ["^terraform-.*"],
+            "matchRepositoryPatterns": ["^thecloudsolutions/terraform-.*"],
+            "updateTypes": ["minor", "patch"],
+            "schedule": ["on the last Fri of the month at 06:00 am"],
+            "labels": ["no-release"]
+        },
+        {
+            "groupName": "GitHub Actions Update",
+            "groupSlug": "github-actions",
+            "description": "Monthly updates for minor and patch versions of GitHub Actions",
+            "matchPaths": [".github/workflows/**"],
+            "matchManagers": ["github-actions"],
+            "updateTypes": ["minor", "patch"],
+            "schedule": ["on the last Fri of the month at 07:00 am"],
+            "labels": ["no-release"]
+        }
+    ]
+}
