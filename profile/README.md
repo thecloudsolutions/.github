@@ -68,4 +68,4 @@
 <a href="https://thecloudsolutions.com/contact-us" title="Get in touch!"><img src="https://img.shields.io/badge/Get_in_touch!-3FB950?style=for-the-badge" alt="Get in touch!" height="30"></a>
 
 # ©️ Copyrights
-> Copyright © 2020-2024 <a href="https://thecloudsolutions.com/" title="Cloud Solutions - AWS Cloud & DevOps services for startups!">Cloud Solutions</a>. All rights reserved.
+> Copyright © 2020-2025 <a href="https://thecloudsolutions.com/" title="Cloud Solutions - AWS Cloud & DevOps services for startups!">Cloud Solutions</a>. All rights reserved.
