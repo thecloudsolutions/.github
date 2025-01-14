@@ -10,35 +10,45 @@ version-template: "$MAJOR.$MINOR.$PATCH"
 version-resolver:
   major:
     labels:
-      - "breaking-change"
       - "major"
+      - "breaking-change"
   minor:
     labels:
-      - "feature"
       - "feat"
+      - "feature"
+      - "enhancement"
       - "minor"
   patch:
     labels:
-      - "fix"
       - "bug"
+      - "fix"
       - "bugfix"
       - "hotfix"
-      - "refactor"
-      - "auto-update"
       - "patch"
+      - "refactor"
+      - "docs"
+      - "documentation"
+      - "auto-update"
   default: "minor" # Default version bump when no matching labels are found.
+
+exclude-labels:
+  - "no-release"
 
 # Include only changes from the target branch for the release.
 filter-by-commitish: true
 
 # Categorize pull requests and issues in the release notes based on their labels.
 categories:
+  - title: "💥 Breaking Changes"
+    labels:
+      - "breaking-change"
   - title: "🚀 Features"
     labels:
       - "feature"
       - "feat"
       - "major"
       - "minor"
+      - "enhancement"
   - title: "🐛 Bug Fixes"
     labels:
       - "fix"
@@ -46,12 +56,13 @@ categories:
       - "bugfix"
       - "hotfix"
       - "patch"
-  - title: "💥 Breaking Changes"
-    labels:
-      - "breaking-change"
   - title: "🛠️ Refactoring"
     labels:
       - "refactor"
+  - title: "📝 Documentation"
+    labels:
+      - "docs"
+      - "documentation"
   - title: "🤖 Automated Updates"
     labels:
       - "auto-update"
@@ -60,7 +71,7 @@ categories:
 change-template: |
   <details>
     <summary>$TITLE (@$AUTHOR, #$NUMBER)</summary>
-    $BODY
+  $BODY
   </details>
 
 # Template for the overall release notes structure.
