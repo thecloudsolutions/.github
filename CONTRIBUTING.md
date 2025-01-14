@@ -54,7 +54,7 @@ To submit a Pull Request:
 
 1. Follow all instructions in the [Pull Request template](.github/PULL_REQUEST_TEMPLATE.md).
 2. Ensure all automated tests pass before submitting.
-3. Use clear, concise commit messages (refer to our [Style Guide](#StyleGuide)).
+3. Use clear, concise commit messages (refer to our [Style Guide](#-style-guide)).
 4. Mention relevant issues (e.g., “Closes #123”).
 
 Once submitted, a maintainer will review your PR. Additional feedback, testing, or changes may be requested before it is merged.
