@@ -1,26 +1,30 @@
 # 📓 Contributing
 
-First and foremost, thank you for considering contributing to Cloud Solutions! We truly appreciate your interest and effort in making our community better. 🧑‍💻 The future of Open Source relies on you!
+First and foremost, thank you for considering contributing to Cloud Solutions! We truly appreciate your interest and effort in making our community better.
 
-## 🌟 Code of Conduct
+## 📜 Code of Conduct
 
-Cloud Solutions is dedicated to providing a welcoming, inclusive, and harassment-free environment for all. Please review our [Code of Conduct](CODE_OF_CONDUCT.md) to understand the behaviors expected within our community and the actions that will not be tolerated.
+Cloud Solutions is dedicated to providing a welcoming, inclusive, and harassment-free environment for all.
+
+> [!IMPORTANT]
+> All contributors must adhere to the [Code of Conduct](https://github.com/thecloudsolutions/.github/blob/main/CODE_OF_CONDUCT.md) to ensure a welcoming and inclusive environment.
 
 ## 🛠️ Before You Start
 
-### Cloud Solutions Projects
+Every Cloud Solutions project is housed in its own repository on GitHub. Before you start contributing, familiarize yourself with the specific project you're interested in.
 
-Every Cloud Solutions project is housed in its own repository on GitHub. Before you start contributing, familiarize yourself with the specific project you're interested in. Each repository includes a `README.md` file that provides:
+Each repository includes a `README.md` file that provides:
 
 - A project overview.
 - Setup instructions.
 - Details on running tests.
 
-Feel free to explore and understand the project's structure before diving in.
+> [!NOTE]
+> Feel free to explore and understand the project's structure before diving in.
 
 ## 🚀 How To Contribute
 
-### Reporting Bugs
+### Reporting bugs
 
 Help us improve by reporting bugs. Here's how:
 
@@ -30,7 +34,7 @@ Help us improve by reporting bugs. Here's how:
    - Include clear steps to reproduce the bug.
    - Provide relevant system details (e.g., OS, environment).
 
-### Suggesting Enhancements
+### Suggesting enhancements
 
 Have an idea for improvement? Follow these steps:
 
@@ -38,7 +42,7 @@ Have an idea for improvement? Follow these steps:
 2. Clearly describe the feature, its benefits, and potential use cases.
 3. Reference any related issues or discussions if available.
 
-### Contributing Code
+### Code contributing
 
 If you want to dive into the codebase, here’s how:
 
@@ -52,12 +56,13 @@ If you want to dive into the codebase, here’s how:
 
 To submit a Pull Request:
 
-1. Follow all instructions in the [Pull Request template](.github/PULL_REQUEST_TEMPLATE.md).
+1. Follow all instructions in the [Pull Request Template](https://github.com/thecloudsolutions/.github/blob/main/PULL_REQUEST_TEMPLATE/pull_request_template.md).
 2. Ensure all automated tests pass before submitting.
 3. Use clear, concise commit messages (refer to our [Style Guide](#-style-guide)).
 4. Mention relevant issues (e.g., “Closes #123”).
 
-Once submitted, a maintainer will review your PR. Additional feedback, testing, or changes may be requested before it is merged.
+> [!IMPORTANT]
+> Once submitted, a maintainer will review your PR. Additional feedback, testing, or changes may be requested before it is merged.
 
 ## 🇽🇾🇿 Versioning
 
@@ -68,18 +73,19 @@ Versioning is an essential part of maintaining consistency and clarity in projec
 3. **major (`X.y.z`)**: Reserved for changes that are not backward-compatible or represent a significant evolution.
 4. **no-release**: If a release does not need to be created, the changes may be labeled as `no-release`.
 
-When creating a Pull Request, contributors do not need to assign version labels. Maintainers will determine the appropriate version increment based on the nature of the changes.
+> [!WARNING]
+> When creating a Pull Request, contributors do not need to assign version labels. Maintainers will determine the appropriate version increment based on the nature of the changes.
 
-## ⌨️ Style Guide
+## </> Style Guide
 
-### Git Commit Messages
+### Commit messages
 
 - Use present tense (e.g., "Add feature" not "Added feature").
 - Keep the first line under 72 characters.
 - Explain "why" in the body if necessary.
 - Use the imperative mood ("Move source to..." not "Moves source to...")
 
-### Coding Standards
+### Coding standards
 
 - Adhere to the project’s coding conventions outlined in its `README.md` or style guides.
 - Write clean, readable, and maintainable code.
@@ -88,7 +94,7 @@ When creating a Pull Request, contributors do not need to assign version labels.
 
 If you're contributing to a Terraform repository, follow these detailed guidelines:
 
-### Documentation Updates
+### Documentation updates
 
 - Always update `README.md` to reflect new variables, outputs, or changes.
 - Maintain clear and consistent descriptions for variables and outputs.
@@ -99,32 +105,51 @@ If you're contributing to a Terraform repository, follow these detailed guidelin
 - Ensure examples use realistic and representative values.
 - Confirm examples align with the latest module updates.
 
-### Testing Terraform Modules
+### Terraform testing
 
-1. **Local Testing**:
+1. **Local**:
    - Use `terraform plan` and `terraform apply` to verify changes.
    - Ensure the test environment is isolated (e.g., a dedicated AWS account).
-2. **Automated Testing**:
+2. **Automated**:
    - Write tests using [Terratest](https://terratest.gruntwork.io/) (Go-based testing framework).
    - Place test cases in the `test/src` directory.
    - Validate changes with assertions on resource outputs.
 
-### Deprecation Guidelines
+### Deprecation guidelines
 
 - Move deprecated variables or resources to `variables-deprecated.tf`.
 - Provide clear warnings and fallback mechanisms in the documentation.
 - Reference replacement variables or approaches in both code and docs.
 
-### Automated Checks
+### Automated checks
 
-- Ensure that PRs pass:
-  - Linting tools (e.g., `terraform fmt` or `tflint`).
-  - Validation with `terraform validate`.
-  - Tests in CI/CD pipelines.
-- Maintainers will run final tests using isolated environments before merging.
+Ensure that all automated checks pass for your PR:
+
+- Linting tools (e.g., `terraform fmt` or `tflint`).
+- Validation with `terraform validate`.
+- Tests in CI/CD pipelines.
+
+> [!TIP]
+> Maintainers will run final tests using isolated environments before merging.
+
+## 🌍 Join Us
+
+Your contributions, ideas, and feedback are invaluable in building great projects together. You can help improve the project by:
+
+- Answering questions in discussions or forums.
+- Sharing solutions to common problems.
+- Contributing to documentation updates.
+
+> [!NOTE]
+> We would be thrilled to have you as part of the Cloud Solutions community!
+
+The future of `Open Source` relies on you!
 
 ## 🔗 Attribution
 
-This CONTRIBUTING guide is inspired by best practices and tailored for the Cloud Solutions community.
+> [!IMPORTANT]
+> This `CONTRIBUTING` guide is inspired by best practices and tailored for the Cloud Solutions community.
 
-Thank you for your contribution! We’re excited to build a better community together.
+## ©️ Copyrights
+
+Copyright © 2020-2025 [Cloud Solutions](https://thecloudsolutions.com/). All rights reserved.
