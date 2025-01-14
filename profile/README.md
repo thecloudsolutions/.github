@@ -29,13 +29,13 @@
 >
 > [!NOTE]
 >
-> ### <a href="https://thecloudsolutions.com/aws-and-devops-re-build/" title="Cloud Solutions - AWS & DevOps re:Build">AWS & DevOps re:Build</a>
->
-> re:Build is our core service, laying the foundations for those ready to elevate their AWS journey. It’s our way of crafting a well-architected AWS Cloud infrastructure that’s set up for success.
->
 > ### <a href="https://thecloudsolutions.com/aws-and-devops-re-align/" title="Cloud Solutions - AWS & DevOps re:Align">AWS & DevOps re:Align</a>
 >
 > re:Align is our benchmark service, made to evaluate how your AWS setup complies with the AWS Well-Architected Framework. It’s our way of ensuring your AWS journey is on the right track.
+>
+> ### <a href="https://thecloudsolutions.com/aws-and-devops-re-build/" title="Cloud Solutions - AWS & DevOps re:Build">AWS & DevOps re:Build</a>
+>
+> re:Build is our core service, laying the foundations for those ready to elevate their AWS journey. It’s our way of crafting a well-architected AWS Cloud infrastructure that’s set up for success.
 >
 > ### <a href="https://thecloudsolutions.com/aws-and-devops-re-maintain/" title="Cloud Solutions - AWS & DevOps re:Maintain">AWS & DevOps re:Maintain</a>
 >
