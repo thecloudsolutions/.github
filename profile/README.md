@@ -1,6 +1,4 @@
-<p align="center">
-    <img src="https://cdn.thecloudsolutions.com/wp-content/uploads/2023/10/favicon-512x512-1.png" alt="Cloud Solutions Logo" height="500">
-</p>
+[![Cloud Solutions Banner](./banner.png?raw=true)](https://thecloudsolutions.com)
 
 ## 💡 About us
 >
