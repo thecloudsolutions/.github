@@ -3,7 +3,7 @@
 Thank you for your contribution to Cloud Solutions! 🚀  
 To help us review your changes effectively, please provide the following details:
 
-## 🤔 What has changed?
+## 🔎 What has changed?
 
 Summarize the updates or new features introduced in this pull request. Focus on the main points.
 
