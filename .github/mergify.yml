@@ -1,7 +1,7 @@
 # Shared Conditions
 shared:
   is_default_branch: &is_default_branch
-    - and:
+    - or:
         - "base=main"
         - "base=master"
 
@@ -80,11 +80,11 @@ shared:
 
   is_readme: &is_readme
     - and:
-        - "files~=^README\\..*$"
+        - 'files~=^README\..*$'
 
   requires_thecloudsolutions: &requires_thecloudsolutions
     - or:
-        - "files~=(mergify|dependabot|renovate|CODEOWNERS|\.github|Makefile|Dockerfile)"
+        - 'files~=(mergify|dependabot|renovate|CODEOWNERS|\.github|Makefile|Dockerfile)'
         - "label~=(thecloudsolutions-engineering)"
 
   requires_readme_rebuild: &requires_readme_rebuild
@@ -104,7 +104,7 @@ shared:
 
   requires_description: &requires_description
     - and:
-        - "-body~=[0-9A-Za-z]{3,}\\s+[0-9A-Za-z]{3,}\\s+[0-9A-Za-z]{3,}"
+        - '-body~=[0-9A-Za-z]{3,}\s+[0-9A-Za-z]{3,}\s+[0-9A-Za-z]{3,}'
         - "body~=(Describe high-level what changed)"
 
   not_pending: &not_pending
@@ -113,7 +113,7 @@ shared:
 
   is_media: &is_media
     - and:
-        - "files~=\\.(gif|png|jpg|mp4)$"
+        - 'files~=\.(gif|png|jpg|mp4)$'
 
   is_auto_update: &is_auto_update
     - and:
@@ -200,8 +200,8 @@ pull_request_rules:
   - name: "Remove triage label to PRs"
     conditions:
       - or:
-        - and: *is_approved
-        - and: *is_closed
+          - and: *is_approved
+          - and: *is_closed
     actions:
       label:
         remove:
@@ -310,7 +310,7 @@ pull_request_rules:
       - and: *is_default_branch
       - and: *requires_rebase
     actions:
-      rebase:
+      rebase: {}
 
   - name: "Close automated PRs with persistent conflicts"
     conditions:
