@@ -79,4 +79,4 @@
 
 # ©️ Copyrights
 
-Copyright © 2020-2025 [Cloud Solutions](https://thecloudsolutions.com/). All rights reserved.
+Copyright © 2020-2026 [Cloud Solutions](https://thecloudsolutions.com/). All rights reserved.
