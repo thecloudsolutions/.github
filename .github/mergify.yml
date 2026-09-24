@@ -107,13 +107,17 @@ shared:
         - '-body~=[0-9A-Za-z]{3,}\s+[0-9A-Za-z]{3,}\s+[0-9A-Za-z]{3,}'
         - "body~=(Describe high-level what changed)"
 
-  not_pending: &not_pending
+  checks_ready: &checks_ready
     - and:
+        - "#check-success>0"
         - "#check-pending=0"
+        - "#check-failure=0"
+        - "#check-stale=0"
 
   is_media: &is_media
     - and:
-        - 'files~=\.(gif|png|jpg|mp4)$'
+        - "#files>0"
+        - '-files~=(?i)^(?!.*\.(gif|png|jpg|mp4)$).*'
 
   is_auto_update: &is_auto_update
     - and:
@@ -366,7 +370,10 @@ pull_request_rules:
       - and: *is_bot_author
       - and: *is_media
       - and: *is_auto_update
-      - and: *not_pending
+      - and: *not_wip
+      - and: *not_in_conflict
+      - and: *checks_ready
+      - "#changes-requested-reviews-by=0"
     actions:
       label:
         add:
