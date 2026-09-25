@@ -121,7 +121,7 @@ shared:
 
   is_auto_update: &is_auto_update
     - and:
-        - "head~=auto-update/.*"
+        - "head~=^auto-update/.+"
 
   is_new_pr: &is_new_pr
     - and:
