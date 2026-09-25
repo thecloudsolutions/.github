@@ -89,10 +89,10 @@ shared:
 
   requires_readme_rebuild: &requires_readme_rebuild
     - and:
-        - "files=README.yaml"
         - or:
-            - "-files=README.md"
-            - "-files=README.md.gotmpl"
+            - "files=README.yaml"
+            - "files=README.md.gotmpl"
+        - "-files=README.md"
 
   requires_rebase: &requires_rebase
     - and:
