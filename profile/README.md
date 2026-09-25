@@ -4,9 +4,11 @@
 >
 > [!IMPORTANT]
 >
-> ### Cloud Solutions provides complete AWS Cloud & DevOps solutions for startups.
+> ### AWS, DevOps & AI. Your foundation for innovation
 >
-> We are a leading provider of AWS Cloud and DevOps consulting services, specializing in transforming businesses through customized technology solutions.
+> Cloud Solutions is a Europe-based AWS consulting partner focused on helping startups scale with AWS, DevOps and AI through secure cloud architecture, automation, modernization and ongoing consulting.
+>
+>We specialize in Terraform automation, CI/CD pipelines, multi-account AWS Cloud architectures, and alignment with the AWS Well-Architected Framework.
 >
 > Backed by years of experience and a team of industry experts, our approach is rooted in a commitment to innovation, quality, and client success.
 >
